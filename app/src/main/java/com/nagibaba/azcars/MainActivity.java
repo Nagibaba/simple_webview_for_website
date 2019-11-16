@@ -1,6 +1,7 @@
-package com.nagibaba.yenishefeq;
+package com.nagibaba.azcars;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -24,13 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-//        webSettings.setDomStorageEnabled(true);
-        //webSettings.setAppCacheEnabled(true);
-//        webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
 
         this.webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("http://yenishefeq.com/");
+        webView.loadUrl("http://azcars.az/");
 
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
